@@ -2,10 +2,10 @@ import random
 import string
 import json
 
-# ===== 可复现随机种子（建议你实验固定）=====
+# ===== Reproducible random seed (recommended to keep fixed in experiments) =====
 random.seed(42)
 
-# 可组合的单词池
+# Reusable word pools
 prefix_words = [
     "nova", "pixel", "orbit", "luna", "zen", "swift", "mint",
     "alpha", "echo", "prime", "flux", "stellar", "astro",
@@ -43,7 +43,7 @@ def generate_unique_users(n):
     return users
 
 
-# ===== 生成 800 个 =====
+# ===== Generate 800 users =====
 new_users = generate_unique_users(800)
 
 with open("random_users_800.json", "w") as f:

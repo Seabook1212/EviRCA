@@ -57,33 +57,23 @@ class SemanticRequestParsingSkill:
         mentioned = {
             target for term, target in telemetry_terms.items() if term in lower
         }
-        if mentioned and ("only" in lower or "只" in message):
+        if mentioned and "only" in lower:
             enabled_telemetry = {key: key in mentioned for key in enabled_telemetry}
         for key, words in {
             "metrics": [
                 "no metrics",
                 "without metrics",
                 "disable metrics",
-                "不要用 metrics",
-                "不用 metrics",
             ],
             "logs": [
                 "no logs",
                 "without logs",
                 "disable logs",
-                "不要用 logs",
-                "不用 logs",
-                "不要用 log",
-                "不用 log",
             ],
             "traces": [
                 "no traces",
                 "without traces",
                 "disable traces",
-                "不要用 traces",
-                "不用 traces",
-                "不要用 trace",
-                "不用 trace",
             ],
         }.items():
             if any(word in lower or word in message for word in words):
@@ -97,11 +87,11 @@ class SemanticRequestParsingSkill:
         }
         output_mentioned = any(
             word in lower for word in ["service", "pod", "fault", "type", "ranking"]
-        ) or any(word in message for word in ["服务", "异常类型", "排名"])
-        if output_mentioned and ("only" in lower or "只" in message):
-            wants_service = "service" in lower or "服务" in message
+        )
+        if output_mentioned and "only" in lower:
+            wants_service = "service" in lower
             wants_pod = "pod" in lower
-            wants_fault = "fault" in lower or "type" in lower or "异常类型" in message
+            wants_fault = "fault" in lower or "type" in lower
             requested_outputs = {
                 "service_ranking": wants_service and not wants_fault,
                 "pod_ranking": wants_pod and not wants_fault,

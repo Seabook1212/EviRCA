@@ -15,7 +15,7 @@ OUTPUT_FILE = Path(
 ).expanduser()
 
 
-# ---------- 基础工具 ----------
+# ---------- Basic utilities ----------
 def try_parse_json(log):
     try:
         return json.loads(log)
@@ -135,7 +135,7 @@ def clean_message(log, parsed_json):
     if parsed_json:
         return parsed_json.get("msg", str(log))
 
-    # Spring Boot 风格
+    # Spring Boot style
     parts = log.split(" : ")
     if len(parts) > 1:
         return parts[-1]
@@ -143,7 +143,7 @@ def clean_message(log, parsed_json):
     return log
 
 
-# ---------- 主逻辑 ----------
+# ---------- Main logic ----------
 def main():
     if not INPUT_FILE.exists():
         raise FileNotFoundError(f"Input CSV not found: {INPUT_FILE}")
@@ -190,7 +190,7 @@ def main():
                 "timestamp": row["timestamp"],
                 "trace_id": trace_id,
                 "span_id": span_id,
-                "service": row["container"],   # 可后续映射 service
+                "service": row["container"],   # Can be mapped to a service name later
                 "node": row["node"],
                 "pod": row["pod"],
                 "container": row["container"],
