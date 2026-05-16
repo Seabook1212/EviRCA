@@ -1,0 +1,18 @@
+kind: NetworkChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-network-partition-carts-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: carts
+    pods:
+      sock-shop:
+        - carts-5b77c45b65-ks75w
+  mode: one
+  action: partition
+  duration: 180s
+  direction: to

@@ -1,0 +1,20 @@
+kind: StressChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-cpu-hog-front-end-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: front-end
+    pods:
+      sock-shop:
+        - front-end-65f844fc76-9z5xb
+  mode: one
+  stressors:
+    cpu:
+      workers: 1
+      load: 70
+  duration: 180s

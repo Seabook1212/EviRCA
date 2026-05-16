@@ -1,0 +1,21 @@
+kind: NetworkChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-network-loss-catalogue-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: catalogue
+    pods:
+      sock-shop:
+        - catalogue-58bdd4d4f9-48jpd
+  mode: one
+  action: loss
+  duration: 180s
+  loss:
+    loss: '30'
+    correlation: '25'
+  direction: to

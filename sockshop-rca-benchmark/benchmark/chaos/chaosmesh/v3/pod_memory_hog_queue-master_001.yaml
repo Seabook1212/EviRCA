@@ -1,0 +1,20 @@
+kind: StressChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-memory-hog-queue-master-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: queue-master
+    pods:
+      sock-shop:
+        - queue-master-5bb5566684-9gkdj
+  mode: one
+  stressors:
+    memory:
+      workers: 1
+      size: 600M
+  duration: 180s

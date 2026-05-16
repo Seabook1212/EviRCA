@@ -1,0 +1,26 @@
+kind: JVMChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-java-exception-orders-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: orders
+    pods:
+      sock-shop:
+        - orders-94d48dc8-prbdt
+  mode: one
+  duration: 180s
+  action: exception
+  port: 9277
+  class: works.weave.socks.orders.controllers.OrdersController
+  method: newOrder
+  name: >-
+    works.weave.socks.orders.controllers.OrdersController-newOrder-exception-001
+  returnValue: ''
+  exception: java.lang.RuntimeException()
+  latency: 0
+  ruleData: ''

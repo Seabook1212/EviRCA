@@ -1,0 +1,137 @@
+version: v1
+
+settings:
+  temporal_margin_seconds: 45
+  min_strong_pod_score: 0.60
+  min_shared_upstreams: 2
+  local_resource_min_delta_ratio:
+    cpu_usage_pct: 0.20
+    memory_usage_pct: 0.10
+    restart_count: 0.10
+    ready_ratio: 0.10
+  score_adjustments:
+    shared_issue_hint: 0.06
+    single_pod_local_hint: 0.08
+    dependency_symptom_hint: -0.08
+    downstream_local_failure_hint: -0.08
+    shared_downstream_dependency_hint: 0.10
+    temporal_precedence_hint: 0.06
+    temporal_conflict: -0.08
+    topology_conflict: -0.10
+    topology_support_hint: 0.05
+    local_resource_support: 0.08
+    symptom_only_signal: -0.07
+
+rule_groups:
+  multi_pod_patterns:
+    enabled: true
+    rules:
+      - id: shared_multi_pod_anomaly
+        description: Multiple sibling pods with similarly strong anomalies suggest a shared dependency or service-level issue.
+        min_affected_pods: 2
+        min_sibling_relative_score: 0.70
+      - id: single_pod_local_anomaly
+        description: One strong anomalous pod while siblings stay much quieter suggests a pod-local issue.
+        strong_pod_score_threshold: 0.60
+        max_sibling_relative_score: 0.45
+      - id: partial_pod_subset_anomaly
+        description: A small subset of anomalous siblings may indicate traffic skew, hotspot routing, sticky sessions, shard ownership, or node-local issues.
+        enabled: false
+      - id: traffic_skew_or_hotspot_hint
+        description: Localized pod impact without clear local resource failure may be caused by uneven traffic distribution rather than an intrinsic pod fault.
+        enabled: false
+
+  dependency_propagation:
+    enabled: true
+    rules:
+      - id: downstream_edge_symptom
+        description: Outbound edge anomalies with weak local evidence suggest the current service is a symptom carrier.
+      - id: downstream_local_failure
+        description: Multiple sibling pods with similar failure-like symptoms plus direct local failure evidence on a downstream dependency suggest propagated dependency impact.
+      - id: shared_downstream_dependency
+        description: Several anomalous upstream services pointing to the same downstream service strengthen the downstream candidate.
+        min_upstream_services: 2
+      - id: call_chain_amplification_hint
+        description: Anomalies that intensify along a dependency chain should increase suspicion of earlier deeper downstream causes.
+        enabled: false
+
+  temporal_precedence:
+    enabled: true
+    rules:
+      - id: earlier_anomaly_precedence
+        description: Earlier anomalies on a plausible propagation path are more root-cause-like.
+        margin_seconds: 45
+      - id: late_anomaly_penalty
+        description: Significantly later anomalies are more likely propagated symptoms.
+        margin_seconds: 45
+      - id: simultaneous_multi_layer_failure
+        description: Near-simultaneous anomalies across many layers suggest shared infrastructure, rollout, configuration, or broad network causes.
+        enabled: false
+
+  topology_plausibility:
+    enabled: true
+    rules:
+      - id: topology_conflict
+        description: Candidates outside the main anomalous path or adjacency should be treated cautiously.
+      - id: adjacent_path_support
+        description: Candidates on or next to the anomalous path get a plausibility boost.
+      - id: blast_radius_fit_hint
+        description: Candidates that naturally explain the observed blast radius should receive stronger plausibility.
+        enabled: false
+      - id: blast_radius_mismatch_penalty
+        description: Candidates that cannot explain the observed blast radius should be treated cautiously.
+        enabled: false
+
+  local_vs_propagated:
+    enabled: true
+    rules:
+      - id: local_resource_support
+        description: Strong local resource or restart signals support a local fault hypothesis.
+      - id: symptom_only_signal
+        description: Latency or error symptoms without local support are more likely propagated than root-causal.
+
+  log_specificity:
+    enabled: false
+    rules:
+      - id: high_specificity_log_signal
+        description: Concrete repeated errors naming a dependency, exception, crash, OOM, rejected operation, or connection failure deserve more weight than generic symptom logs.
+      - id: background_log_noise_penalty
+        description: Routine listener, checkpoint, keepalive, or connection chatter should be down-weighted unless corroborated by stronger local evidence.
+      - id: generic_timeout_penalty
+        description: Generic upstream timeout messages are less specific than concrete downstream failure logs.
+
+  trace_interpretation:
+    enabled: false
+    rules:
+      - id: internal_span_local_issue
+        description: Slow internal service spans suggest local service execution issues.
+      - id: outbound_edge_dependency_hint
+        description: Slow or failing outbound edges suggest downstream, dependency, or network-related causes.
+      - id: critical_path_weighting
+        description: Evidence on critical request paths should weigh more than low-frequency side-path evidence.
+
+  service_role_priors:
+    enabled: false
+    rules:
+      - id: stateful_dependency_prior
+        description: Stateful shared dependencies such as databases, caches, queues, and brokers deserve stronger suspicion when they show local anomalies.
+      - id: frontend_symptom_surface_prior
+        description: Frontend, gateway, and API aggregation services often surface symptoms early but are not necessarily root-causal without local evidence.
+      - id: middleware_blast_radius_prior
+        description: Shared middleware with broad fan-in or fan-out can explain wide blast radius when local evidence exists.
+
+  infrastructure_patterns:
+    enabled: false
+    rules:
+      - id: node_level_shared_failure
+        description: Multiple unrelated anomalous pods on the same node suggest node pressure, noisy neighbor, disk, or node networking issues.
+      - id: synchronized_infrastructure_hint
+        description: Broad synchronized impact with weak service-local evidence should raise suspicion of shared infrastructure, rollout, configuration, or network causes.
+
+  evidence_quality:
+    enabled: false
+    rules:
+      - id: multi_source_evidence_support
+        description: Independent metric, log, and trace evidence should strengthen confidence more than repeated copies of the same weak signal.
+      - id: concrete_evidence_preference
+        description: When candidates both fit, prefer the one with more specific, concrete, and local evidence.

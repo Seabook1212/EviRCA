@@ -1,0 +1,17 @@
+kind: PodChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-do-fault-carts-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: carts
+    pods:
+      sock-shop:
+        - carts-5b77c45b65-ks75w
+  mode: one
+  action: pod-failure
+  duration: 60s

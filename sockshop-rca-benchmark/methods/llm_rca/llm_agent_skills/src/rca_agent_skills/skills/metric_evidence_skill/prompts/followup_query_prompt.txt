@@ -1,0 +1,2 @@
+Return structured metric query intents only. Do not emit raw PromQL.
+

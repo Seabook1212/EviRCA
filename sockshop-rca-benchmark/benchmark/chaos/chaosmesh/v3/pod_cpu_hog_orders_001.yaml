@@ -1,0 +1,20 @@
+kind: StressChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-cpu-hog-orders-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: orders
+    pods:
+      sock-shop:
+        - orders-94d48dc8-prbdt
+  mode: one
+  stressors:
+    cpu:
+      workers: 1
+      load: 70
+  duration: 180s

@@ -1,0 +1,19 @@
+{
+  "incident_id": "incident_sample_001",
+  "backend_mode": "csv",
+  "abnormal_window": {
+    "start": "2026-04-25T11:00:00Z",
+    "end": "2026-04-25T11:15:00Z"
+  },
+  "baseline_window": {
+    "start": "2026-04-25T10:45:00Z",
+    "end": "2026-04-25T11:00:00Z"
+  },
+  "csv_inputs": {
+    "metrics_csv": "tests/fixtures/sample_metrics.csv",
+    "logs_csv": "tests/fixtures/sample_logs.csv",
+    "traces_csv": "tests/fixtures/sample_traces.csv",
+    "topology_file": "tests/fixtures/sample_topology.json"
+  }
+}
+

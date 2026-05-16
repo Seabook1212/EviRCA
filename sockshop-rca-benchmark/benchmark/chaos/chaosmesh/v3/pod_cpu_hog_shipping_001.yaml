@@ -1,0 +1,20 @@
+kind: StressChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-cpu-hog-shipping-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: shipping
+    pods:
+      sock-shop:
+        - shipping-66d8f78d5f-9rcrc
+  mode: one
+  stressors:
+    cpu:
+      workers: 1
+      load: 70
+  duration: 180s

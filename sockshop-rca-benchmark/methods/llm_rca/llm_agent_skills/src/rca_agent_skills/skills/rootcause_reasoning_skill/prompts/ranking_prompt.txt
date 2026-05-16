@@ -1,0 +1,1 @@
+Rank RCA hypotheses with the LLM as the final scorer, using coarse rule hints and programmatic flags as supporting signals rather than hard overrides.

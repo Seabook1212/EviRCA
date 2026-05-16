@@ -1,0 +1,283 @@
+project:
+  name: rca-agent-skills
+  version: v1
+
+defaults:
+  backend_mode: csv
+  namespace: sock-shop
+  top_k: 5
+  timezone: UTC
+
+features:
+  enable_followup_query_expansion: false
+  enable_reasoning_llm: true
+
+budgets:
+  metric_followup: 2
+  log_followup: 2
+  trace_followup: 2
+
+detection:
+  min_series_points: 3
+  zscore_threshold: 2.0
+  robust_zscore_threshold: 3.0
+  persistence_ratio_threshold: 0.5
+  min_relative_delta_ratio: 0.20
+  log_spike_ratio_threshold: 3.0
+  trace_spike_ratio_threshold: 3.0
+  trace_min_failure_count: 2
+  trace_min_failure_rate: 0.2
+  minimum_count: 3
+  metric_in_window:
+    enabled: true
+    max_patterns_per_entity_metric: 1
+    min_points: 6
+    rolling_points: 6
+    min_segment_points: 3
+    sudden_shift_ratio: 0.3
+    burst_multiplier: 2.0
+    min_spike_points: 2
+    gap_multiplier: 4
+    min_gap_seconds: 60
+    sudden_shift_metrics: []
+    burst_metrics: []
+    gap_metrics:
+      - request_rate
+      - success_rate
+      - latency_p50
+      - latency_p90
+      - latency_p95
+      - latency_p99
+      - ready_ratio
+  log_keywords:
+    - timeout
+    - error
+    - exception
+    - refused
+    - reset
+    - disconnect
+    - retry
+    - oom
+    - killed
+    - partition
+    - failed
+    - panic
+    - deadline
+    - backoff
+    - unavailable
+    - unhealthy
+  log_background_template_hints:
+    - connection accepted
+    - wiredtiger message
+    - wt_session.checkpoint
+    - saving checkpoint snapshot
+
+severity_calibration:
+  enabled: true
+  keep_raw_severity: true
+  blend_rule: calibrated_only
+  raw_weight: 0.3
+  metric:
+    mode: empirical_tail
+    min_baseline_points: 20
+    fallback: heuristic
+  log:
+    mode: bayesian_surprise
+    fallback: heuristic
+  trace:
+    latency_mode: empirical_tail
+    failure_mode: bayesian_surprise
+    min_baseline_points: 20
+    fallback: heuristic
+  empirical_tail:
+    min_p_value: 1.0e-6
+    max_p_value: 1.0
+    smoothing: 1.0
+  bayesian_surprise:
+    min_probability: 1.0e-12
+    poisson_alpha: 1.0
+    poisson_beta: 1.0
+    beta_alpha: 1.0
+    beta_beta: 1.0
+    log_low_count_full_confidence: 20
+    log_low_count_power: 0.5
+
+debug:
+  print_queries: true
+  print_skill_inputs: true
+  print_skill_outputs: true
+  print_anomaly_records: true
+  print_llm_io: true
+  max_logged_records_per_skill: 1000
+
+api:
+  prometheus:
+    base_url: http://34.28.33.102:30990
+    namespace: sock-shop
+    step: 5s
+    timeout_sec: 180
+    max_retries: 4
+    retry_backoff_sec: 2
+    retry_statuses:
+      - 429
+      - 500
+      - 502
+      - 503
+      - 504
+    kpi_window: 30s
+    istio_window: 30s
+    network_window: 1m
+    restart_count_window: 1m
+  loki:
+    base_url: http://34.28.33.102:31300
+    query: '{namespace="sock-shop"}'
+    timeout_sec: 180
+    max_retries: 4
+    retry_backoff_sec: 2
+    retry_statuses:
+      - 429
+      - 500
+      - 502
+      - 503
+      - 504
+    limit: 5000
+    direction: forward
+    slice_minutes: 2
+    min_split_interval_ms: 1
+  jaeger:
+    base_url: http://34.28.33.102:32614
+    timeout_sec: 120
+    limit: 10000
+    split_min_seconds: 1
+    excluded_services:
+      - jaeger-all-in-one
+      - jaeger-query
+      - jaeger-collector
+
+llm:
+  provider: openai
+  model: gpt-5.4-mini
+  # model: gpt-5-mini
+  temperature: 0.0
+
+bayesian:
+  enabled: true
+  temperature: 1.0
+  default_fault_prior: 0.05
+  default_evidence_likelihood: 0.10
+  contradictory_evidence_weight: 0.25
+  min_probability: 1.0e-6
+  fault_priors:
+    cpu_stress: 0.05
+    memory_stress: 0.05
+    pod_failure: 0.05
+    network_delay: 0.05
+    network_loss: 0.05
+    network_partition: 0.05
+    io_fault: 0.05
+    exception_injection: 0.05
+  evidence_likelihoods:
+    cpu_stress:
+      cpu_high: 0.90
+      memory_high: 0.10
+      restart_increase: 0.20
+      ready_drop: 0.15
+      error_increase: 0.20
+      latency_spike: 0.30
+      trace_edge_latency: 0.25
+      log_keyword_spike: 0.10
+      log_template_spike: 0.10
+    memory_stress:
+      memory_high: 0.90
+      cpu_high: 0.15
+      restart_increase: 0.35
+      ready_drop: 0.25
+      error_increase: 0.25
+      latency_spike: 0.25
+      log_keyword_spike: 0.20
+    pod_failure:
+      restart_increase: 0.85
+      ready_drop: 0.80
+      error_increase: 0.45
+      trace_edge_failure: 0.40
+      latency_spike: 0.30
+      log_keyword_spike: 0.35
+      log_template_spike: 0.35
+    network_delay:
+      latency_spike: 0.85
+      trace_edge_latency: 0.85
+      trace_path_latency: 0.75
+      error_increase: 0.20
+      success_drop: 0.20
+      network_rx_tx: 0.30
+      cpu_high: 0.10
+      memory_high: 0.10
+    network_loss:
+      trace_edge_failure: 0.80
+      error_increase: 0.70
+      success_drop: 0.75
+      latency_spike: 0.55
+      network_rx_tx: 0.35
+      log_keyword_spike: 0.30
+    network_partition:
+      missing_data_gap: 0.93
+      success_drop: 0.80
+      error_increase: 0.65
+      trace_edge_failure: 0.75
+      latency_spike: 0.65
+      network_rx_tx: 0.40
+    io_fault:
+      restart_increase: 0.70
+      ready_drop: 0.65
+      error_increase: 0.80
+      trace_edge_failure: 0.60
+      success_drop: 0.65
+      latency_spike: 0.40
+      log_keyword_spike: 0.45
+      log_template_spike: 0.55
+      memory_high: 0.20
+      trace_edge_latency: 0.45
+    exception_injection:
+      log_keyword_spike: 0.80
+      log_template_spike: 0.75
+      log_level_shift: 0.70
+      error_increase: 0.55
+      trace_edge_failure: 0.35
+  rule_prior_multipliers:
+    local_resource_support: 1.40
+    single_pod_local_hint: 1.30
+    shared_issue_hint: 1.15
+    shared_downstream_dependency_hint: 1.20
+    topology_support_hint: 1.20
+    temporal_precedence_hint: 1.20
+    symptom_only_signal: 0.60
+    dependency_symptom_hint: 0.70
+    downstream_local_failure_hint: 0.65
+    topology_conflict: 0.40
+    temporal_conflict: 0.50
+
+llm_context:
+  max_candidate_supporting_evidence: 12
+  max_candidate_brief_notes: 4
+  max_evidence_per_pod: 12
+  max_service_level_evidence: 12
+  max_rules_per_group: 4
+  max_topology_edges: 200
+  max_propagation_hints: 20
+  include_evidence_tree_in_initial_ranking: false
+  include_evidence_tree_in_reconciliation: true
+  enable_cross_level_reconciliation: true
+  align_parent_service_with_top_pod: true
+  min_parent_alignment_pod_score: 0.8
+  parent_alignment_min_score_gap: 0.08
+  parent_alignment_max_symptom_lead: 0.08
+  align_final_service_with_top_pod: true
+  final_service_pod_alignment_max_gap: 0.1
+  final_same_service_fault_alignment_max_gap: 0.2
+  bayesian_override_guard_min_probability: 0.01
+  bayesian_override_guard_score_cap: 0.72
+  high_volume_log_override_count: 20
+  final_posterior_score_floor_weight: 1.0
+  shared_symptom_candidate_penalty: 0.06
+  shared_symptom_carrier_score_cap: 0.82
+  single_pod_downstream_candidate_bonus: 0.06

@@ -1,0 +1,17 @@
+kind: IOChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-io-fault-carts-db-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: carts-db
+  mode: all
+  action: fault
+  errno: 5
+  percent: 10
+  volumePath: /data/db
+  duration: 180s

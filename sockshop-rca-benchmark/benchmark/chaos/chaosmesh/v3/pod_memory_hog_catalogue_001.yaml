@@ -1,0 +1,20 @@
+kind: StressChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-memory-hog-catalogue-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: catalogue
+    pods:
+      sock-shop:
+        - catalogue-58bdd4d4f9-48jpd
+  mode: one
+  stressors:
+    memory:
+      workers: 1
+      size: 60M
+  duration: 180s

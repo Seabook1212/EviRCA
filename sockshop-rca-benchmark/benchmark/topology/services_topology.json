@@ -1,0 +1,18 @@
+{
+  "services": [
+    {"name": "front-end", "depends_on": ["catalogue", "carts", "orders", "user", "session-db"]},
+    {"name": "catalogue", "depends_on": ["catalogue-db"]},
+    {"name": "carts", "depends_on": ["carts-db"]},
+    {"name": "orders", "depends_on": ["orders-db", "payment", "shipping", "user", "carts"]},
+    {"name": "catalogue-db", "depends_on": []},
+    {"name": "carts-db", "depends_on": []},
+    {"name": "orders-db", "depends_on": []},
+    {"name": "payment", "depends_on": []},
+    {"name": "shipping", "depends_on": ["rabbitmq"]},
+    {"name": "queue-master", "depends_on": ["rabbitmq"]},
+    {"name": "user", "depends_on": ["user-db"]},
+    {"name": "user-db", "depends_on": []},
+    {"name": "rabbitmq", "depends_on": []},
+    {"name": "session-db", "depends_on": []}
+  ]
+}

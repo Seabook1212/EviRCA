@@ -1,0 +1,17 @@
+kind: PodChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-do-fault-user-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: user
+    pods:
+      sock-shop:
+        - user-5c64496568-7jpx8
+  mode: one
+  action: pod-failure
+  duration: 60s

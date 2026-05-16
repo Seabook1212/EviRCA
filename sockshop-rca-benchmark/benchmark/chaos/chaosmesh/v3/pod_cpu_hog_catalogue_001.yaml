@@ -1,0 +1,20 @@
+kind: StressChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-cpu-hog-catalogue-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: catalogue
+    pods:
+      sock-shop:
+        - catalogue-58bdd4d4f9-48jpd
+  mode: one
+  stressors:
+    cpu:
+      workers: 1
+      load: 70
+  duration: 180s

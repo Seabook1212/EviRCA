@@ -1,0 +1,9 @@
+{
+  "system": "sock-shop-mini",
+  "services": ["front-end", "orders", "orders-db"],
+  "edges": [
+    {"source": "front-end", "target": "orders"},
+    {"source": "orders", "target": "orders-db"}
+  ]
+}
+

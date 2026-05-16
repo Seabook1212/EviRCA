@@ -1,0 +1,22 @@
+kind: NetworkChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-network-delay-front-end-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: front-end
+    pods:
+      sock-shop:
+        - front-end-65f844fc76-9z5xb
+  mode: one
+  action: delay
+  duration: 180s
+  delay:
+    latency: 100ms
+    correlation: '25'
+    jitter: 20ms
+  direction: to

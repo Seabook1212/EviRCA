@@ -1,0 +1,22 @@
+kind: NetworkChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-network-delay-orders-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: orders
+    pods:
+      sock-shop:
+        - orders-94d48dc8-prbdt
+  mode: one
+  action: delay
+  duration: 180s
+  delay:
+    latency: 100ms
+    correlation: '25'
+    jitter: 20ms
+  direction: to

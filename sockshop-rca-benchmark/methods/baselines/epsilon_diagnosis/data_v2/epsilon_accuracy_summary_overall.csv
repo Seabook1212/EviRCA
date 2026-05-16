@@ -1,0 +1,2 @@
+telemetry_day,telemetry_day_suffix,batch_plan_day_suffix,fault_metadata_day_suffix,normal_run_day_suffix,normal_baseline_strategy,normal_runs_available,normal_runs_used,ranking_mode,days_count,n_total,n_ok,n_error,service_top1_accuracy,service_top3_accuracy,service_top5_accuracy,pod_top1_accuracy,pod_top3_accuracy,pod_top5_accuracy,total_runtime_seconds,avg_runtime_per_exception_seconds
+ALL_DAYS,,,,,latest_preceding,,,max_epsilon,5,320,320,0,0.33125,0.525,0.64375,0.29375,0.44375,0.546875,167.42034659900128,0.523188583121879

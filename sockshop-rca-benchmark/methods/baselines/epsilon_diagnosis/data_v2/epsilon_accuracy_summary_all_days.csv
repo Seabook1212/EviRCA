@@ -1,0 +1,7 @@
+telemetry_day,telemetry_day_suffix,batch_plan_day_suffix,fault_metadata_day_suffix,normal_run_day_suffix,normal_baseline_strategy,normal_runs_available,normal_runs_used,ranking_mode,n_total,n_ok,n_error,service_top1_accuracy,service_top3_accuracy,service_top5_accuracy,pod_top1_accuracy,pod_top3_accuracy,pod_top5_accuracy,total_runtime_seconds,avg_runtime_per_exception_seconds,days_count
+2026_03_12,0312,0312,0312,0312,latest_preceding,20,15,max_epsilon,64,64,0,0.328125,0.484375,0.578125,0.28125,0.40625,0.484375,34.78150383100001,0.5434609973593751,
+2026_03_13,0313,0313,0313,0313,latest_preceding,20,15,max_epsilon,64,64,0,0.3125,0.5625,0.609375,0.265625,0.484375,0.53125,32.80295199000102,0.5125461248437659,
+2026_03_14,0314,0314,0314,0314,latest_preceding,20,14,max_epsilon,64,64,0,0.359375,0.578125,0.71875,0.328125,0.453125,0.578125,33.59270745200047,0.5248860539375073,
+2026_03_17,0317,0317,0317,0317,latest_preceding,20,17,max_epsilon,64,64,0,0.328125,0.4375,0.609375,0.3125,0.40625,0.53125,33.20944740300001,0.5188976156718752,
+2026_03_18,0318,0318,0318,0318,latest_preceding,20,17,max_epsilon,64,64,0,0.328125,0.5625,0.703125,0.28125,0.46875,0.609375,33.03373592299977,0.5161521237968714,
+ALL_DAYS,,,,,latest_preceding,,,max_epsilon,320,320,0,0.33125,0.525,0.64375,0.29375,0.44375,0.546875,167.42034659900128,0.523188583121879,5.0

@@ -1,0 +1,9 @@
+fault_types:
+  - io_fault
+  - network_loss
+  - network_delay
+  - network_partition
+  - pod_failure
+  - cpu_stress
+  - memory_stress
+  - exception_injection

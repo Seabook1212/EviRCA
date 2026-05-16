@@ -1,0 +1,26 @@
+kind: JVMChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-java-exception-carts-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: carts
+    pods:
+      sock-shop:
+        - carts-5b77c45b65-ks75w
+  mode: one
+  duration: 180s
+  action: exception
+  port: 9277
+  class: works.weave.socks.cart.controllers.ItemsController
+  method: addToCart
+  name: >-
+    works.weave.socks.cart.controllers.ItemsController-addToCart-exception-001
+  returnValue: ''
+  exception: java.lang.RuntimeException()
+  latency: 0
+  ruleData: ''

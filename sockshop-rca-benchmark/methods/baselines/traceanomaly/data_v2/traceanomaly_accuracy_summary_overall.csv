@@ -1,0 +1,2 @@
+telemetry_day,n_total,n_ok,n_error,service_top1_accuracy,service_top3_accuracy,service_top5_accuracy,total_runtime_seconds,avg_runtime_per_exception_seconds,sum_of_individual_runtime_seconds,avg_runtime_per_processed_exception_seconds,service_ranking_mode,service_ranking_sort_mode,service_path_ancestor_weight
+ALL_DAYS,320,301,19,0.259375,0.3875,0.43125,27402.09907921392,85.6315596225435,1907.5439906481188,5.961074970775371,leaf_only,count_then_score,0.4

@@ -1,0 +1,2 @@
+telemetry_day,n_total,n_ok,n_error,service_top1_accuracy,service_top3_accuracy,service_top5_accuracy,evidence_mode,scoring_mode,clustering_mode,log_variant,fault_window_minutes,normal_window_offset_minutes,normal_window_duration_minutes,target_scoring_runtime_seconds_total,target_scoring_runtime_seconds_avg_per_target,end_to_end_runtime_seconds,end_to_end_runtime_seconds_avg_per_target
+ALL_DAYS,320,320,0,0.2375,0.578125,0.69375,maximal,tarantula,paper_hac,parsed,5,5,5,9.723436338972533,0.030385738559289166,480.39310662100615,1.5012284581906443

@@ -1,0 +1,11 @@
+timestamp,trace_id,span_id,service,node,pod,container,log_level,log_source,log_type,message,raw_log
+2026-04-25T10:46:00Z,,,orders-db,node1,orders-db-0,orders-db,INFO,database,general_log,connection accepted,connection accepted
+2026-04-25T10:50:00Z,,,orders-db,node1,orders-db-0,orders-db,INFO,database,general_log,query completed,query completed
+2026-04-25T10:55:00Z,,,orders-db,node1,orders-db-0,orders-db,INFO,database,general_log,query completed,query completed
+2026-04-25T11:02:00Z,,,orders-db,node1,orders-db-0,orders-db,ERROR,database,exception_log,out of memory while flushing page cache,out of memory while flushing page cache
+2026-04-25T11:03:00Z,,,orders-db,node1,orders-db-0,orders-db,ERROR,database,exception_log,out of memory while flushing page cache,out of memory while flushing page cache
+2026-04-25T11:05:00Z,,,orders-db,node1,orders-db-0,orders-db,ERROR,database,exception_log,connection reset by peer,connection reset by peer
+2026-04-25T11:07:00Z,,,orders-db,node1,orders-db-0,orders-db,ERROR,database,exception_log,connection reset by peer,connection reset by peer
+2026-04-25T11:10:00Z,,,orders-db,node1,orders-db-0,orders-db,ERROR,database,exception_log,out of memory while flushing page cache,out of memory while flushing page cache
+2026-04-25T11:12:00Z,,,front-end,node1,front-end-abc-1,front-end,WARN,application,timeout_log,request timeout waiting for orders,request timeout waiting for orders
+

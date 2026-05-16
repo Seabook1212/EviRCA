@@ -1,0 +1,7 @@
+telemetry_day,n_total,n_ok,n_error,service_top1_accuracy,service_top3_accuracy,service_top5_accuracy,evidence_mode,scoring_mode,clustering_mode,log_variant,fault_window_minutes,normal_window_offset_minutes,normal_window_duration_minutes,target_scoring_runtime_seconds_total,target_scoring_runtime_seconds_avg_per_target,end_to_end_runtime_seconds,end_to_end_runtime_seconds_avg_per_target
+2026_03_12,64,64,0,0.25,0.578125,0.6875,maximal,tarantula,paper_hac,parsed,5,5,5,2.0021974789269734,0.03128433560823396,89.68417684099404,1.401315263140532
+2026_03_13,64,64,0,0.21875,0.5625,0.6875,maximal,tarantula,paper_hac,parsed,5,5,5,1.9937865639367374,0.03115291506151152,95.4854662160069,1.4919604096251078
+2026_03_14,64,64,0,0.21875,0.578125,0.6875,maximal,tarantula,paper_hac,parsed,5,5,5,1.9784307790541789,0.030912980922721545,99.52110270199773,1.5550172297187146
+2026_03_17,64,64,0,0.28125,0.59375,0.703125,maximal,tarantula,paper_hac,parsed,5,5,5,1.6978771680151112,0.026529330750236113,94.09042478099582,1.4701628872030597
+2026_03_18,64,64,0,0.21875,0.578125,0.703125,maximal,tarantula,paper_hac,parsed,5,5,5,2.0511443490395322,0.03204913045374269,100.48024747500313,1.5700038667969238
+ALL_DAYS,320,320,0,0.2375,0.578125,0.69375,maximal,tarantula,paper_hac,parsed,5,5,5,9.723436338972533,0.030385738559289166,480.39310662100615,1.5012284581906443

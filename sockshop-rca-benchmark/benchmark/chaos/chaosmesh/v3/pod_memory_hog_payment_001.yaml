@@ -1,0 +1,20 @@
+kind: StressChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-memory-hog-payment-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: payment
+    pods:
+      sock-shop:
+        - payment-664c4d4c74-r8lxz
+  mode: one
+  stressors:
+    memory:
+      workers: 1
+      size: 60M
+  duration: 180s

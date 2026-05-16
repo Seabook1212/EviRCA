@@ -1,0 +1,18 @@
+kind: NetworkChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-network-partition-orders-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: orders
+    pods:
+      sock-shop:
+        - orders-94d48dc8-prbdt
+  mode: one
+  action: partition
+  duration: 180s
+  direction: to

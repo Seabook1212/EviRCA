@@ -1,0 +1,22 @@
+kind: NetworkChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: sock-shop
+  name: pod-network-delay-catalogue-001
+spec:
+  selector:
+    namespaces:
+      - sock-shop
+    labelSelectors:
+      name: catalogue
+    pods:
+      sock-shop:
+        - catalogue-58bdd4d4f9-48jpd
+  mode: one
+  action: delay
+  duration: 180s
+  delay:
+    latency: 100ms
+    correlation: '25'
+    jitter: 20ms
+  direction: to
