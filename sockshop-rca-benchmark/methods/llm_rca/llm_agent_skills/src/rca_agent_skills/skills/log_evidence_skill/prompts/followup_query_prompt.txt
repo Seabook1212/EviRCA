@@ -1,2 +1,0 @@
-Return structured log query intents only. Do not emit raw LogQL.
-

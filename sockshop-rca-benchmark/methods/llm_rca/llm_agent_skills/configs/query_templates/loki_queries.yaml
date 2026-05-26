@@ -1,7 +1,0 @@
-base_query: '{namespace="{namespace}"}'
-followup_templates:
-  by_service: '{namespace="{namespace}", container="{service}"}'
-  by_pod: '{namespace="{namespace}", pod="{pod}"}'
-  by_keyword: '{namespace="{namespace}"} |= "{keyword}"'
-  by_service_and_keyword: '{namespace="{namespace}", container="{service}"} |= "{keyword}"'
-

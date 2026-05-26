@@ -1,2 +1,0 @@
-Return structured trace query intents only. Do not emit unrestricted Jaeger queries.
-

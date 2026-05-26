@@ -1,1 +1,0 @@
-Match evidence bundles to the fixed V1 fault taxonomy only, and treat rule-based hints as coarse plausibility priors rather than deterministic truth.

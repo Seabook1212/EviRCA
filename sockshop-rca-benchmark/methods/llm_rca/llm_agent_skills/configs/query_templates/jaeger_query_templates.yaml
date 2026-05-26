@@ -1,9 +1,0 @@
-services_path: /api/services
-traces_path: /api/traces
-default_params:
-  limit: 10000
-followup_filters:
-  service: service
-  operation: operation
-  tag_error: error
-
