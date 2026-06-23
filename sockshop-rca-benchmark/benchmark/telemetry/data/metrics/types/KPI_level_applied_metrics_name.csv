@@ -1,0 +1,14 @@
+KPI_name
+request_rate
+success_rate
+error_count
+latency_p50
+latency_p90
+latency_p95
+latency_p99
+cpu_usage_pct
+memory_usage_pct
+restart_count
+ready_ratio
+network_rx
+network_tx
