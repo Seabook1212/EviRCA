@@ -4,10 +4,6 @@ This repository currently hosts the Sock Shop RCA benchmark package under [`sock
 
 The detailed benchmark README remains here: [`sockshop-rca-benchmark/README.md`](sockshop-rca-benchmark/README.md)
 
-## Dataset
-
-- released dataset folder: [Google Drive](https://drive.google.com/drive/folders/1dBNDc2YUYyjJch_BmhO-Hx-0YvdPHHl_?usp=drive_link)
-
 ## Benchmark Package Summary
 
 The benchmark package includes reusable assets for workload generation, fault injection, telemetry collection, and RCA benchmarking, without bundling the enhanced Sock Shop service source code or the full released telemetry dataset.

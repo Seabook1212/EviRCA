@@ -23,10 +23,6 @@ It is intended to hold the reusable experiment assets needed to reproduce worklo
 - full case-level ground-truth releases
 - large per-case RCA outputs
 
-## Dataset
-
-- released dataset folder: [Google Drive](https://drive.google.com/drive/folders/1dBNDc2YUYyjJch_BmhO-Hx-0YvdPHHl_?usp=drive_link)
-
 ## Repository Layout
 
 - `benchmark/`
