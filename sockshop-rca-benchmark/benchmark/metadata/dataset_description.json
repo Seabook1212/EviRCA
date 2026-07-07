@@ -1,10 +1,52 @@
 {
-  "name": "SockShop-AIOps-RCA-Dataset",
+  "name": "EviRCA Enhanced Sock Shop RCA Benchmark",
   "version": "1.0",
-  "fault_types": ["pod_cpu_hog", "pod_network_latency", "pod_network_loss/corruption", "pod_delete", "pod_memory_hog", "node_cpu_hog", "pod_container_kill", "springboot_app_kill", "springboot_cpu_stress", "springboot_exception", "springboot_memory_stress", "springboot_network_latency"],
-  "services": ["front-end", "catalogue", "carts", "orders", "catalogue-db", "carts-db", "orders-db", "payment", "shipping", "queue-master", "user", "user-db", "rabbitmq", "session-db"],
-  "sampling_interval": "5s",
-  "workload_generator": "locust",
-  "chaos_tool": "litmus chaos",
-  "data_items": ["metrics", "logs", "traces", "events", "workload"]
+  "anonymized_artifact": true,
+  "application": "enhanced Sock Shop",
+  "workload_generator": "Locust",
+  "fault_injection_tool": "Chaos Mesh",
+  "experiment_days": 5,
+  "fault_cases": 320,
+  "normal_baseline_cases": 100,
+  "telemetry_modalities": [
+    "metrics",
+    "logs",
+    "traces"
+  ],
+  "metric_signal_count": 1390,
+  "primary_metric_sampling_interval": "5s",
+  "fault_actions": [
+    "network_delay",
+    "network_loss",
+    "network_partition",
+    "cpu_stress",
+    "memory_stress",
+    "pod_failure",
+    "jvm_exception",
+    "io_fault"
+  ],
+  "services": [
+    "front-end",
+    "catalogue",
+    "carts",
+    "orders",
+    "catalogue-db",
+    "carts-db",
+    "orders-db",
+    "payment",
+    "shipping",
+    "queue-master",
+    "user",
+    "user-db",
+    "rabbitmq",
+    "session-db"
+  ],
+  "evaluation_targets": [
+    "service",
+    "pod",
+    "service_fault",
+    "pod_fault"
+  ],
+  "dataset_payload_status": "Full raw telemetry archives and full case-level ground-truth release files are intentionally omitted from this anonymized repository.",
+  "ground_truth_source": "Fault labels are derived from each case's structured fault_metadata.json when the full dataset is available."
 }

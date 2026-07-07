@@ -1,63 +1,41 @@
-# Dataset Version History
+# Benchmark Metadata Version
 
-## Version 1.0.0  (2026-01-15)
-**Status:** Initial Release  
-**Description:**  
-- First public release of the Sock Shop AIOps Multi-Modal Dataset.  
-- Includes full system topology, baseline workload traces, normal-run metrics/logs/traces, and 10 fault-injection experiments.
-- Covers faults: CPU hog, memory hog, network delay, network loss, pod kill, DB slowdown, DB down, service crash, queue blocking, and cache miss storms.
+## Version 1.0.0
 
-**Included Modules**
-- metadata/
-- normal_run/
-- fault_run/ 
+**Status:** anonymized artifact metadata
 
----
+This metadata describes the EviRCA enhanced Sock Shop RCA benchmark package used for anonymous review.
 
-## Version 1.1.0  (2026-02-01)
-**Changes:**  
-- Added 5 new fault injection cases:
-  - High latency in `payment`
-  - Catalogue-DB down
-  - Message queue saturation
-  - Shipping service thread exhaustion
-  - Orders timeout propagation
-- Added Kubernetes events export for each run.
-- Improved workload generator randomness & behavior diversity.
+## Summary
 
----
+- Application: enhanced Sock Shop
+- Workload generator: Locust
+- Fault injection: Chaos Mesh
+- Fault cases: 320
+- Normal baseline cases: 100
+- Experiment days: 5
+- Telemetry modalities: metrics, logs, traces
+- Selected metric signals: 1,390
+- Primary metric sampling interval: 5 seconds
 
-## Version 1.1.1  (2026-02-10)
-**Fixes:**  
-- Fixed incorrect timestamps in Jaeger trace export.
-- Cleaned duplicated log lines from `carts` and `orders` services.
-- Normalized JSON schema for fault_metadata.json.
+## Fault Actions
 
----
+- network delay
+- network loss
+- network partition
+- CPU stress
+- memory stress
+- pod failure
+- JVM exception injection
+- I/O fault injection
 
-## Version 1.2.0 (2026-03-05)
-**Changes:**  
-- Added Prometheus metric label normalization.
-- Added per-run resource usage snapshot (kubectl top nodes/pods).
-- Added more detailed service topology with dependency directions.
+## Included Metadata Modules
 
----
+- `dataset_description.json`
+- `services_topology.json`
+- metric-name inventories under `benchmark/telemetry/data/metrics/types/`
+- Chaos Mesh YAML specifications under `benchmark/chaos/chaosmesh/`
 
-## Versioning Policy
-- **MAJOR (X.0.0)** — Breaking dataset structure changes or major schema redesign.
-- **MINOR (0.X.0)** — Adding new fault scenarios, new traces, or new data modalities.
-- **PATCH (0.0.X)** — Fixing mistakes, cleaning data, small corrections.
+## Anonymous Review Notes
 
----
-
-## Citation
-If you use this dataset, please cite:
-
-@dataset{sockshop_aiops_dataset,
-title={Sock Shop Multi-Modal Fault Injection Dataset},
-author={Fan Zhang, Dittaya Wanvarie},
-year={2026},
-version={1.0.0},
-paper-url={https://...},
-dataset-url={https://github.com/Seabook1212}
-}
+Full raw telemetry archives, full case-level ground-truth files, service repositories, and dataset hosting links are intentionally omitted from this repository. When the full dataset is available, case labels are derived from structured `fault_metadata.json` files and workload windows are derived from `workload_metadata.json`.
