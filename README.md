@@ -1,6 +1,6 @@
 # EviRCA Artifact Repository
 
-This repository contains the benchmark artifact for **EviRCA**, an evidence-aware, skill-based LLM agent and telemetry-rich microservice RCA benchmark.
+This repository contains the benchmark artifact associated with **EviRCA**, a study on evidence-aware LLM-agent-based microservice root cause analysis and telemetry-rich RCA benchmarking.
 
 The benchmark package is under [`sockshop-rca-benchmark/`](sockshop-rca-benchmark/). It provides the reusable experiment assets used to construct and evaluate the enhanced Sock Shop RCA benchmark. The released dataset folder is linked below.
 
@@ -14,6 +14,8 @@ This repository focuses on benchmark-side materials:
 - metric-type inventories and service-topology metadata
 - baseline RCA runners and compact reproduced result summaries
 - documentation describing the benchmark layout and dataset organization
+
+The EviRCA framework implementation is not included in this repository.
 
 The enhanced Sock Shop service implementations and large telemetry payloads are not duplicated directly in this Git repository. Ground-truth labels are represented by the fault metadata schema and evaluation scripts, and the released dataset folder provides the dataset payloads used by the benchmark.
 

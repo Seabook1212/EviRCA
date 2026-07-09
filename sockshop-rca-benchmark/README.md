@@ -19,6 +19,7 @@ Included in this package:
 
 Not stored directly in this Git repository:
 
+- EviRCA framework implementation
 - full enhanced Sock Shop service source repositories
 - full raw telemetry archives
 - full case-level ground-truth release files
