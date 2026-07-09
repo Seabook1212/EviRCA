@@ -2,9 +2,9 @@
 
 ## Version 1.0.0
 
-**Status:** anonymized artifact metadata
+**Status:** public artifact metadata
 
-This metadata describes the EviRCA enhanced Sock Shop RCA benchmark package used for anonymous review.
+This metadata describes the EviRCA enhanced Sock Shop RCA benchmark package.
 
 ## Summary
 
@@ -36,6 +36,10 @@ This metadata describes the EviRCA enhanced Sock Shop RCA benchmark package used
 - metric-name inventories under `benchmark/telemetry/data/metrics/types/`
 - Chaos Mesh YAML specifications under `benchmark/chaos/chaosmesh/`
 
-## Anonymous Review Notes
+## Dataset Release Notes
 
-Full raw telemetry archives, full case-level ground-truth files, service repositories, and dataset hosting links are intentionally omitted from this repository. When the full dataset is available, case labels are derived from structured `fault_metadata.json` files and workload windows are derived from `workload_metadata.json`.
+Full raw telemetry archives and case-level metadata are distributed through the released dataset folder rather than duplicated directly in this Git repository:
+
+https://drive.google.com/drive/folders/1dBNDc2YUYyjJch_BmhO-Hx-0YvdPHHl_?usp=drive_link
+
+Case labels are derived from structured `fault_metadata.json` files and workload windows are derived from `workload_metadata.json`.

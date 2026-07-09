@@ -1,7 +1,7 @@
 {
   "name": "EviRCA Enhanced Sock Shop RCA Benchmark",
   "version": "1.0",
-  "anonymized_artifact": true,
+  "artifact_visibility": "public",
   "application": "enhanced Sock Shop",
   "workload_generator": "Locust",
   "fault_injection_tool": "Chaos Mesh",
@@ -47,6 +47,7 @@
     "service_fault",
     "pod_fault"
   ],
-  "dataset_payload_status": "Full raw telemetry archives and full case-level ground-truth release files are intentionally omitted from this anonymized repository.",
+  "dataset_url": "https://drive.google.com/drive/folders/1dBNDc2YUYyjJch_BmhO-Hx-0YvdPHHl_?usp=drive_link",
+  "dataset_payload_status": "Full raw telemetry archives and full case-level metadata are distributed through the released dataset folder rather than duplicated directly in this Git repository.",
   "ground_truth_source": "Fault labels are derived from each case's structured fault_metadata.json when the full dataset is available."
 }

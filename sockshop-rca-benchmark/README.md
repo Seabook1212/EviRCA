@@ -6,7 +6,7 @@ The benchmark is built around an enhanced Sock Shop system and is designed for r
 
 ## Scope
 
-Included in this anonymized package:
+Included in this package:
 
 - Locust workload generation scripts and user/profile helpers
 - normal and faulty run orchestration scripts
@@ -17,15 +17,14 @@ Included in this anonymized package:
 - reproduced baseline RCA runners for service-level evaluation
 - compact reproduced result summaries
 
-Intentionally not included:
+Not stored directly in this Git repository:
 
 - full enhanced Sock Shop service source repositories
 - full raw telemetry archives
 - full case-level ground-truth release files
 - large per-case RCA outputs
-- non-anonymous dataset download links
 
-The full telemetry payloads and case-level labels are large and are omitted from this anonymized artifact. Evaluation scripts derive RCA targets from each case's `fault_metadata.json` structure when the full dataset is available.
+The full telemetry payloads and case-level labels are large, so they are distributed through the released dataset folder rather than duplicated in Git. Evaluation scripts derive RCA targets from each case's `fault_metadata.json` structure when the full dataset is available.
 
 ## Benchmark Summary
 
@@ -85,6 +84,8 @@ telemetry/<date>/
 
 RCA methods should use the workload and fault timestamps to select case-specific analysis windows and keep metrics, logs, and traces temporally aligned.
 
-## Notes for Reviewers
+## Dataset
 
-This repository intentionally avoids dataset-hosting links in order to preserve anonymous-review constraints. The committed files are meant to document and reproduce the benchmark construction and evaluation pipeline once the full telemetry payloads are available in the corresponding artifact release.
+Released dataset folder: [Google Drive](https://drive.google.com/drive/folders/1dBNDc2YUYyjJch_BmhO-Hx-0YvdPHHl_?usp=drive_link)
+
+The committed files document and reproduce the benchmark construction and evaluation pipeline, while the dataset folder provides the large telemetry payloads and case-level metadata used by the benchmark.
